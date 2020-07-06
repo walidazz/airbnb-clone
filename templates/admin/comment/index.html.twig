@@ -1,0 +1,64 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des commentaires {% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid">
+    <h1 class="my-5">Gestion des commentaires</h1>
+
+
+
+
+    <table class="table-hover table">
+        <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Annonce</th>
+                <th>Auteur</th>
+                <th>Contenu</th>
+                <th>Note globale</th>
+                <th>Date de création</th>
+
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for comment in pagination.data %}
+
+
+            <td>{{comment.id}}</td>
+            <td>{{comment.annonce.title}}</td>
+            <td>{{comment.author.firstName}}</td>
+            <td>{{comment.content}}</td>
+            <td> {{comment.rating}}
+            </td>
+            <td>publié le {{comment.createdAt|date("m/d/Y à H:i", "Europe/Paris")}}</td>
+            <td> <a href="{{path('admin_comment_edit', {'id' : comment.id})}}"><i class="fas fa-edit mx-1"></i></a>
+                <a href="{{path('admin_comment_delete', {'id' : comment.id})}}" data-action="delete"
+                    data-target="#block_"><i class="fas fa-trash mx-1"></i></a>
+            </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+     {{ pagination.display() }}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        $('[data-action="delete"]').on('click', function () {
+            const target = this.dataset.target;
+            $(target).remove();
+        });
+    });
+</script>
+
+{% endblock %}

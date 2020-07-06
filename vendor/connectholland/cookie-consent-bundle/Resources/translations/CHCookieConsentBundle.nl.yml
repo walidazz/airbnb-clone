@@ -1,0 +1,19 @@
+ch_cookie_consent:
+    title: 'Cookies op onze website.'
+    intro: ''
+    read_more: 'meer uitleg hierover'
+    analytics:
+        title: 'Wilt u analytische cookies?'
+        description: 'Hiermee kunnen wij statistieken verzamelen over de websitebezoek.'
+    tracking:
+        title: 'Wilt u tracking cookies?'
+        description: 'Hiermee kunnen wij de gebruikerservaring verbeteren door het surfgedrag te observeren.'
+    marketing:
+        title: 'Wilt u gepersonaliseerde advertenties?'
+        description: 'Hiermee kunnen advertentienetwerken uw internetgedrag volgen en ontvangt u gepersonaliseerde advertenties afgestemd op uw internetgedrag'
+    social_media:
+        title: 'Wilt u social media cookies?'
+        description: 'Hiermee kunnen socialmedianetwerken cookies plaatsen waarmee u en uw internetgedrag gevolgd kunnen worden.'
+    no: 'Nee'
+    yes: 'Ja'
+    save: 'Opslaan'

@@ -1,0 +1,22 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration - Reservation {% endblock %}
+
+{% block body %}
+
+
+<div class="mx-auto col-6 mt-5">
+
+
+
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    <input type="submit" value="Modifier">
+    {{form_end(form)}}
+
+
+
+
+</div>
+
+{% endblock %}

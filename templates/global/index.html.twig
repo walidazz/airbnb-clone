@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %} {% block title %} Bienvenue sur le meilleur
+réseau d'appartements {% endblock %} {% block body %}
+
+<div class="container">
+  <div class="jumbotron mt-3">
+    <h1 class="display-3">Bienvenue sur mon site !</h1>
+    <p class="lead">
+      Nous mettons en relations les voyageurs et les propriétaires qui veulent
+      profiter d'opportunités et gagner de l'argent en proposant leur bien à la
+      location !
+    </p>
+    <hr class="my-4" />
+    <p>
+      Vous êtes voyageur ? Et vous voulez voir où vous pourrez loger pour votre
+      prochain déplacement ?
+    </p>
+    <p class="lead">
+      <a
+        class="btn btn-primary btn-lg"
+        href="{{ path('annonces') }}"
+        role="button"
+        >Voir nos annonces</a
+      >
+    </p>
+  </div>
+
+  <h2 class="h1 my-5">Nos appartements stars</h2>
+
+  <div class="row">
+    {% for data in annonces %} {% include 'annonce/_ad.html.twig' with
+    {'annonce': data.annonce} %} {% endfor %}
+  </div>
+
+  <h2 class="h1 my-5">Nos propriétaires stars !</h2>
+
+  <div class="row">
+    {% for data in users %}
+    <div class="col">
+      <div class="card border-secondary mb-3">
+        <div class="card-body">
+          <h4 class="card-title">{{ data.user.firstName }}</h4>
+
+          <hr />
+
+          <div class="card-text">
+            <img
+              src="{{ data.user.picture }}"
+              alt="Avatar de {{ data.user.firstName }}"
+              class="float-left mr-3"
+            />
+            <p>{{ data.user.introduction }}</p>
+            <a
+              href="{{ path('show_user', { slug: data.user.slug }) }}"
+              class="btn btn-success float-right"
+              >En savoir plus!</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{{ render(path('ch_cookie_consent.show_if_cookie_consent_not_set')) }}
+{% endblock %}

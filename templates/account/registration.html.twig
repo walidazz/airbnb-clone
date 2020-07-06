@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+<div class="col-6 p-4 m-3 mx-auto">
+
+    <h1>S'inscrire</h1>
+
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    {{form_end(form)}}
+
+</div>
+
+
+{% endblock %}

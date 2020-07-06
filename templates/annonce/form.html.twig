@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+
+<div class="col-6 p-4 m-3 mx-auto">
+
+    {% if create %}
+    <h1>Créer une nouvelle annonce</h1>
+    {% else %}
+    <h1>Modifier une annonce</h1>
+
+
+    {% endif %}
+    {{form_start(form)}}
+    {{form_row(form.title)}}
+
+
+    {{form_widget(form)}}
+    {{form_end(form)}}
+
+</div>
+
+
+{% endblock %}

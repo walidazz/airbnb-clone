@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Walid'Bnb</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Accueil<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('admin_dashboard')}}"> <i class="fas chart-line"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('admin_annonce_index')}}"> <i class="fas fa-hotel"></i> Annonces</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('admin_booking_index')}}"> <i class="fas fa-folder"></i>
+                    Reservations</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('admin_comment_index')}}"> <i class="fas fa-comments"></i>
+                    Commentaires</a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="#"> <i class="fas fa-users"></i> Utilisateurs</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+
+            {% if app.user %}
+            <li class="nav-item dropdown mx-5">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true"
+                    aria-expanded="false">{{app.user.firstName}}</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" target="_blank" href="{{path('annonces')}}"> <i class="fas fa-eye"></i>
+                        Voir le site</a>
+
+                    <a class="dropdown-item" href="{{path('admin_account_logout')}}">Deconnexion</a>
+
+                </div>
+            </li>
+
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+
+{% for label,messages in app.flashes %}
+
+{% for message in messages %}
+<div class="col-4 text-center float-right">
+    <div class="alert alert-dismissible alert-{{label}}">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Notification: </strong> {{message}}
+    </div>
+
+</div>
+
+{% endfor %}
+
+{% endfor %}

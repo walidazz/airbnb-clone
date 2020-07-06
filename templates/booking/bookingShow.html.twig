@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Récapitulatif{% endblock %}
+
+{% block body %}
+
+{% set annonce = booking.annonce%}
+{% set author = booking.annonce.author %}
+
+<h1>Reservation n° {{booking.id}}</h1>
+{% if app.request.query.get('withAlert') %}
+<div class="alert alert-success">
+    <h4 class="alert-heading">
+        <p>Votre réservation aupres de {{author.firstName}} pour l'annonce de {{annonce.title}}</p>
+        a bien été prise en compte
+    </h4>
+</div>
+{% endif %}
+<div class="row">
+
+    <div class="col">
+        <div class="alert alert-light">
+            <h2>Détails</h2>
+            <dl class="row">
+                <dt class="col-md-4">Numéro de réservation </dt>
+                <dd class="col-md-8">{{booking.id}}</dd>
+                <dt class="col-md-4">Date d'arrivée</dt>
+                <dd class="col-md-8">{{booking.startDate|date("m/d/Y")}}</dd>
+                <dt class="col-md-4">Date de départ</dt>
+                <dd class="col-md-8">{{booking.endDate|date("m/d/Y")}}</dd>
+                <dt class="col-md-4">Nombre de nuit</dt>
+                <dd class="col-md-8">{{booking.duration}}</dd>
+                <dt class="col-md-4">Montant totale</dt>
+                <dd class="col-md-8">{{booking.amount}} &euro;</dd>
+                <dt class="col-md-4">Commentaire</dt>
+                <dd class="col-md-8">{{booking.comment}}</dd>
+            </dl>
+            <hr>
+
+            <h2 class="alert-heading">Votre hote</h2>
+            <div class="row">
+                <div class="col-3">
+                    <img src="{{author.picture}}" class="avatar-medium" alt="avatar de booking">
+                </div>
+                <div class="col-9">
+                    <h4><a href="{{path('profile_page', {'slug' : author.slug})}}">{{author.firstName}}</a></h4>
+                    <span class="badge badge-primary">Nombre d'annonce : {{author.annonces|length}}</span>
+                    <p>Description: {{author.description}}</p>
+                    <a href="{{path('profile_page', {'slug' : author.slug})}}"> Voir la page de profile de l'hote</a>
+                </div>
+
+                <div class="alert alert-light" id="comment">
+                    <h2 class="alert-heading">Votre avis compte !</h2>
+                    {% if date() > date(booking.endDate) %}
+                    {% set comment = booking.annonce.CommentFromAuthor(app.user) %}
+                    {% if comment is not null %}
+                    <blockquote>
+                        {{comment.content}}
+                    </blockquote>
+
+                    <strong>Note : </strong>
+                    {% include 'shared/rating.html.twig' with {'rating': comment.rating} %}
+                    {% else %}
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                    {% endif %}
+
+                    {% else %}
+                    <p>Vous ne pourrez pas noter cette annonce tant que votre voyage ne sera pas complet
+                        !</p>
+                    {% endif %}
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <div class="col">
+        <div class="alert alert-light">
+            <h2>Votre hébergement</h2>
+            <h4><a href="{{path('annonce', {'slug' : annonce.slug})}}">{{annonce.title}}</a></h4>
+            <img class="img-fluid" src="{{annonce.coverImage}}" alt="image de {{annonce.title}}">
+            <p>{{annonce.content|raw}}</p>
+            <a class="btn btn-info btn-md" href="{{path('annonce', {'slug' : annonce.slug})}}">Plus d'information
+                concernant l'annonce</a>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

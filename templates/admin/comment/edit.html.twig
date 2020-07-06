@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration - Commentaire {% endblock %}
+
+{% block body %}
+
+
+<div class="mx-auto col-6 mt-5">
+
+
+    <div class="row border border-black p-3">
+        <p>
+            Auteur : {{comment.author.firstName}} <br>
+            Annonce lié : {{comment.annonce.title}} <br>
+            Note: {{comment.rating}} <br>
+            Date de publication du formulaire: {{comment.createdAt|date("m/d/Y")}}
+
+
+
+        </p>
+
+    </div>
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    <input type="submit" value="Modifier">
+    {{form_end(form)}}
+
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification de l'annonce {{annonce.title}} {% endblock %}
+
+
+{% form_theme form _self %}
+
+{% block body %}
+
+<div class="row">
+
+    <div class="col">
+
+        {{form_start(form)}}
+        {{form_widget(form)}}
+        <input type="submit" value="saaave">
+        {{form_end(form)}}
+    </div>
+    <div class="col">
+        <div class="card title">Les reservations</div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Voyageur</th>
+                        <th>Date de réservation</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in annonce.bookings %}
+                    <tr>
+                        <td>{{booking.id}}</td>
+                        <td>{{booking.booker.firstName}}</td>
+                        <td> Du {{booking.createdAt|date("m/d/Y")}}</td>
+                        <td> <a href=""> <i class="fas fa-pen"></i></a></td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<div>
+
+
+
+
+    <div class="card title">Les commentaires</div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Voyageur</th>
+                    <th>Note</th>
+                    <th>Contenu du commentaire</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comment in annonce.comments %}
+                <tr>
+                    <td>{{comment.id}}</td>
+                    <td>{{comment.author.firstName}}</td>
+                    <td>{{comment.rating}} </td>
+                    <td> {{comment.content}}</td>
+                    <td> <a href=""> <i class="fas fa-pen"></i></a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block _annonce_images_widget %}
+{{ form_widget(form) }}
+{% endblock %}
+
+{% block _annonce_images_entry_row %}
+
+<div id="block_{{id}}">
+    {{ form_widget(form) }}
+</div>
+{% endblock %}
+
+{% block _annonce_images_entry_widget %}
+<div class="row align-items-center mb-3">
+    <div class="col-4">
+        {% if value %}
+        {{ form_row(form.url) }}
+
+        <img src="{{value.url}}" class="img-fluid" alt="">
+
+        {% endif %}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.caption) }}
+    </div>
+    <div class="col">
+        <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">
+            <i class="fas fa-trash"></i>
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        $('[data-action="delete"]').on('click', function () {
+            const target = this.dataset.target;
+            $(target).remove();
+        });
+    });
+</script>
+
+{% endblock %}

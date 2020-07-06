@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+<div class="row">
+
+
+
+    {% for annonce in annonces %}
+    <div class="col border border-primary m-3 p-3">
+        {{annonce.title}}
+        <img height="200" width="200" src="{{annonce.coverImage}}" alt="">
+        {{annonce.introduction}}
+        Auteur: {{annonce.author.firstname}}
+        {{annonce.content}} <br>
+        {% include 'shared/rating.html.twig' with {'rating': annonce.AvgRating} %} <br>
+
+        {% if annonce.comments|length > 0 %}
+
+        {% else %}
+
+        <small>pas encore noté</small>
+        {% endif %}
+
+        <span class-"m-3"> <a class=" btn btn-primary btn-md" href="{{path('annonce', {'slug' : annonce.slug})}}">Voir
+                page
+                détail</a>
+        </span>
+
+
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

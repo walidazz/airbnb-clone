@@ -1,0 +1,35 @@
+{% set url = path('annonce', {'slug': annonce.slug}) %}
+
+<div class="col-md-4">
+    <div class="card bg-light mb-3">
+        <div class="card-heannonceer text-center">
+            {{ annonce.rooms }} chambres, <strong>{{ annonce.price | number_format(2, ',', ' ') }}&euro; / nuit</strong> <br>
+
+            {% if annonce.comments|length > 0 %}
+                {% include 'shared/rating.html.twig' with {'rating': annonce.avgRating } %}
+            {% else %}
+                <small>Pas encore noté</small>
+            {% endif %}
+        </div>
+        
+        <a href="{{ url }}">
+            <img src="{{ annonce.coverImage }}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block">
+        </a>
+
+        <div class="card-body">
+            <h4 class="card-title">
+                <a href="{{ url }}">
+                    {{ annonce.title }}
+                </a>
+            </h4>
+            <p class="card-text">
+                {{ annonce.introduction }}
+            </p>
+            <a href="{{ url }}" class="btn btn-primary float-right">En savoir plus !</a>
+
+            {% if app.user and app.user == annonce.author %}
+                <a href="{{ path('annonce_edit', {'slug': annonce.slug}) }}" class="btn btn-secondary">Modifier l'annonce</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

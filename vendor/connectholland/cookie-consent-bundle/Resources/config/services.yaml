@@ -1,0 +1,27 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $cookieConsentTheme: '%ch_cookie_consent.theme%'
+            $cookieCategories: '%ch_cookie_consent.categories%'
+            $useLogger: '%ch_cookie_consent.use_logger%'
+            $cookieConsentPosition: '%ch_cookie_consent.position%'
+
+    ConnectHolland\CookieConsentBundle\:
+        resource: '../../'
+        exclude: '../../{vendor}'
+
+    ConnectHolland\CookieConsentBundle\Controller\:
+        resource: '../../Controller/*'
+        public: true
+
+    ConnectHolland\CookieConsentBundle\Cookie\CookieChecker:
+        arguments: ["@=service('request_stack').getCurrentRequest()"]
+
+    ConnectHolland\CookieConsentBundle\Cookie\CookieLogger:
+        arguments:
+            $request: "@=service('request_stack').getCurrentRequest()"

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('/build/app.css') }}" />
+
+    <script
+      src="https://kit.fontawesome.com/eca951eca7.js"
+      crossorigin="anonymous"
+    ></script>
+
+    {% block stylesheets %}{% endblock %}
+  </head>
+
+  <body>
+    {% include "shared/header.html.twig" %}
+
+    <div class="container">
+      {% block body %}{% endblock %}
+{% include "@CHCookieConsent/cookie_consent_styling.html.twig" %}
+      {{ encore_entry_script_tags("app") }}
+    </div>
+    {% block javascripts %}{% endblock %}
+  </body>
+</html>

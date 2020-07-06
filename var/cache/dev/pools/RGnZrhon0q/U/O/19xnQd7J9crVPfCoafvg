@@ -1,0 +1,22 @@
+<?php //%255BConnectHolland%255CCookieConsentBundle%255CController%255CCookieConsentController%2523showIfCookieConsentNotSet%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Symfony\\Component\\Routing\\Annotation\\Route'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Routing\\Annotation\\Route')),
+    ],
+    null,
+    [
+        'Symfony\\Component\\Routing\\Annotation\\Route' => [
+            'path' => [
+                '/cookie_consent_alt',
+            ],
+            'name' => [
+                'ch_cookie_consent.show_if_cookie_consent_not_set',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SearchController!{% endblock %}
+
+{% block body %}
+
+<div class="form-inline my-2 my-lg-0">{{form_start(form)}}
+{{form_widget(form)}}
+<input type="submit" value="Rechercher">
+{{form_end(form)}}</div>
+
+
+{% endblock %}

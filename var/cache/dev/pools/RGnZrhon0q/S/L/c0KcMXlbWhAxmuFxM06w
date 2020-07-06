@@ -1,0 +1,32 @@
+<?php //%255BApp%255CEntity%255CBooking%2524startDate%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+        clone ($p['Symfony\\Component\\Validator\\Constraints\\GreaterThan'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\GreaterThan')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'type' => [
+                'datetime',
+            ],
+            'message' => [
+                1 => 'date incorrect ',
+            ],
+            'value' => [
+                1 => 'today',
+            ],
+            'groups' => [
+                1 => [
+                    'front',
+                ],
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+    ],
+    []
+); }];

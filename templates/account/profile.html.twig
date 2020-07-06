@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+<div class="col-6 p-4 m-3 mx-auto">
+
+    <h1>Modification de profile</h1>
+
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    <a href="{{path('account_password')}}">Modifier le mot de passe </a>
+    {{form_end(form)}}
+
+</div>
+
+{% endblock %}

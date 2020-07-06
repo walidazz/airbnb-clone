@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce détail{% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="row">
+
+    <div class="col border border-primary m-3 p-3">
+        <div class="row m-5 "></div>
+        Titre:{{annonce.title}} <br>
+        <img height="200" width="200" src="{{annonce.coverImage}}" alt=""> <br>
+        Introduction: {{annonce.introduction}} <br>
+        Contenu: {{annonce.content | raw}} <br>
+        Nombre de chambre {{annonce.rooms}} <br>
+        Prix:{{annonce.rooms}} <br>
+        <div class="border border-black">
+            Auteur: {{annonce.author.firstname}}
+            <img src="{{asset(annonce.author.picture)}}" height="200" width="200" alt="">
+            nb annonce utilisateur {{annonce.author |length}}
+            {{annonce.author.introduction}}
+            <a href="{{path('show_user', {'slug' : annonce.author.slug})}}">Voir profil de ce bouffon</a>
+        </div>
+
+        {% if app.user and app.user == annonce.author %}
+        <a class="btn btn-danger btn-md" href="{{path('annonce_edit', {'id' : annonce.id})}}">
+            Modifier </a>
+        {% endif %}
+
+        <a href="{{path('delete' , {'slug' : annonce.slug})}}" class="btn btn-danger">Supprimer</a>
+
+
+        <a class="btn btn-primary btn-md" href="{{path('booking_create' , {'slug' : annonce.slug})}}"> Reserver !
+        </a>
+
+
+        <div class="row">
+            {% if annonce.comments %}
+            <h4>Section commentaires</h4>
+            <div class="alert alert-info">
+                <h4 class="alert-heading text-center ">
+                    <div class="row align-items-center">
+                        <div class="col">Note globale donnée par nos voyageurs </div>
+                        <div class="col">
+
+                            {% include 'shared/rating.html.twig' with {'rating': annonce.AvgRating} %} <br>
+                            <small>cette moyenne est calculé sur
+                                {{annonce.comments | length}} </small>
+                        </div>
+                    </div>
+
+                </h4>
+            </div>
+            {% for comment in annonce.comments %}
+            <div class="rounded border-black border m-3 p-3">
+                Auteur : {{comment.author.firstName}} <br>
+                {% include 'shared/rating.html.twig'  with {'rating': comment.rating } %}
+
+
+                <br>
+
+                Commentaire: {{comment.content}} <br>
+                date: {{comment.createdAt|date}} <br>
+
+            </div>
+
+
+            {% endfor %}
+            {% endif %}
+        </div>
+
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                {% for image in annonce.images %}
+
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{loop.index0}}"
+                    class=" {% if loop.first %} active {% endif %}"></li>
+
+                {% endfor %}
+
+            </ol>
+            <div class="carousel-inner">
+
+                {% for image in annonce.images %}
+                <div class="carousel-item  {% if loop.first %} active {% endif %}">
+                    <img height="400" src="{{image.url}}" class="d-block w-100" alt="...">
+                </div>
+                <div>
+                    <p>{{image.caption}}</p>
+                </div>
+                {% endfor %}
+
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Précedent</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Suivant</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+<div class="col-4">
+    <div class="col-!">
+        <img src="http://placehold.it/200x200" alt="">
+        <h6>Auteur</h6>
+    </div>
+
+
+</div>
+
+</div>
+{% endblock %}

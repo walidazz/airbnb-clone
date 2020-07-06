@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+<div class="row mx-auto">
+    {% if user is same as(app.user) %}
+    <a href="{{path('account_password')}}" class="btn btn-md btn-primary">Modifier son mot de passe</a>
+    <a href="{{path('edit_profile', {'slug' : user.slug})}}" class="btn btn-md btn-primary">Modifier son profil</a>
+
+
+    {% endif %}
+</div>
+<div class="mx-auto col-4">
+
+    <img src="{{asset(user.picture)}}" alt="">
+    Prénom: {{user.firstName}} <br>
+    Nom : {{user.lastName}} <br>
+    Email: {{user.email}} <br>
+    Introduction: {{user.introduction}} <br>
+
+    Description: {{user.description}} <br>
+
+    Nb d'annonce : {{user.annonces |length}}
+
+    {% if user.roles == 'ROLE_USER' %}
+    Rang: Membre <br>
+    {% endif %}
+
+
+
+</div>
+{% endblock %}

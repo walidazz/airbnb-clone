@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Air'Bnb</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Accueil<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('annonces')}}">Annonces</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <form class="form-inline my-2 my-lg-0" action="{{path('search')}}" method="GET">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            {% if app.user %}
+            <li class="nav-item dropdown mx-5">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true"
+                    aria-expanded="false">{{app.user.firstName}}</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{path('edit_profile', {'slug' : app.user.slug})}}">Modifier
+                        profile</a>
+                    <a class="dropdown-item" href="{{path('profile_page')}}">Ma page</a>
+                    <a class="dropdown-item" href="{{path('annonce_create')}}">Créer une annonce</a>
+
+
+                    <a class="dropdown-item" href="{{path('logout')}}">Deconnexion</a>
+                    <a class="dropdown-item" href="{{path('account_bookings')}}"> Nos réservation</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('account_login')}}">Se connecter</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('account_register')}}">S'inscrire</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+
+{% for label,messages in app.flashes %}
+{% for message in messages %}
+<div class="col-4 text-center float-right">
+    <div class="alert alert-dismissible alert-{{label}}">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{message}}
+    </div>
+</div>
+{% endfor %}
+{% endfor %}
